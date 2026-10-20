@@ -85,12 +85,6 @@ punani web      # browser on :4096 — token from terminal, not Clerk
 
 ---
 
-## Visual assets
-
-Hero and product stills were generated with **[Kling AI](https://klingai.com)** (black + `#CCB478` gold palette). Logo: **`public/logo.png`**.
-
----
-
 <p align="center">
-  <sub>© Naga Codex · Maurice Holda · Hamburg</sub>
+  <a href="https://nagacodex.cloud"><strong>nagacodex.cloud</strong></a> — Naga Codex · Maurice Holda · Hamburg
 </p>
