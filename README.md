@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>The coding agent that asks before it touches your repo.</strong><br />
-  Terminal · browser · MCP · eight providers · free models first
+  Free-first for builders on zero-cost models · or bring OpenAI, Groq, OpenRouter, Ollama — your keys
 </p>
 
 <p align="center">
@@ -32,11 +32,13 @@
 
 | | |
 | --- | --- |
+| **Who it’s for** | **Free-model crew** — live on free tiers, Ollama, or can’t pay for $20/mo agents. **Key holders** — OpenAI, Groq, OpenRouter, whatever you already use. Same agent either way. |
+| **Free experience** | Not a toy: tools, MCP, diffs, browser UI. Free models ranked first; failover when a provider rate-limits. No Punani subscription. |
 | **Permissions** | Ordered rules per action — allow, ask, deny. Last match wins. Same engine in terminal and browser. |
 | **Diffs** | Every write is previewed before it lands. |
 | **Surfaces** | Full terminal agent, `punani web` UI with live preview, MCP tools from any server you add. |
 | **Models** | OpenRouter, NVIDIA NIM, Groq, Cerebras, OpenAI, FreeLLMAPI, Ollama, LM Studio — live catalogs, pricing shown up front. |
-| **Cost** | MIT licensed. Bring your own key; free tiers ranked first when rate limits hit. |
+| **Cost** | MIT licensed. Your keys on your machine. We don’t resell tokens. |
 
 <p align="center">
   <img src="./public/media/hero-atmosphere.jpg" alt="" width="920" />
@@ -48,7 +50,9 @@
 
 **Punani-AI** is the marketing site and waitlist (**[punani.agency](https://punani.agency)**).
 
-The agent CLI lives in **punani-powerd** (npm: `punani-powerd`) until the full monorepo moves here.
+The agent CLI is **`punani-powerd`** on npm (package name `punani-powerd`, command `punani`).
+
+**Most people never clone this repo.** Install the agent once globally, use your own API keys, and run `punani` or `punani web`. Clone **Punani-AI** only if you contribute to the site; clone **punani-powerd** only if you hack on the agent itself.
 
 ### Run locally
 
@@ -74,7 +78,9 @@ Production: **`pk_live_` / `sk_live_`** on Vercel only. Keep **`pk_test_`** in `
 
 ---
 
-## Install the agent
+## Install the agent (end users)
+
+One-time global install — it stays on your PATH until you upgrade or uninstall:
 
 ```bash
 npm i -g punani-powerd
@@ -82,6 +88,14 @@ punani --init
 punani          # terminal
 punani web      # browser on :4096 — token from terminal, not Clerk
 ```
+
+Upgrade later: `npm i -g punani-powerd@latest`
+
+---
+
+## License
+
+[MIT](./LICENSE) · Copyright (c) 2026 Naga Codex
 
 ---
 
