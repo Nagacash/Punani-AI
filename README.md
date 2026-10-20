@@ -11,7 +11,8 @@
 
 <p align="center">
   <a href="https://punani.agency">Website</a> ·
-  <a href="https://github.com/Nagacash/Punani-AI">GitHub</a> ·
+  <a href="https://github.com/Nagacash/Punani-AI">This site</a> ·
+  <a href="https://github.com/Nagacash/Punani-Power-Agent">Agent repo</a> ·
   <a href="https://nagacodex.cloud">Naga Codex</a>
 </p>
 
@@ -55,7 +56,14 @@ The agent CLI is **`punani-powerd`** on npm (package name `punani-powerd`, comma
 This repo is **only the landing page** (Next.js + Clerk). The “one dependency” pitch
 applies to **`punani-powerd`**, not this site.
 
-**Most people never clone this repo.** Install the agent once globally, use your own API keys, and run `punani` or `punani web`. Clone **Punani-AI** only if you contribute to the site; clone **punani-powerd** only if you hack on the agent itself.
+**Most people never clone this repo.** Install the agent once globally (`npm i -g punani-powerd`), use your own API keys, and run `punani` or `punani web`.
+
+| Repo | Purpose |
+| --- | --- |
+| **[Punani-AI](https://github.com/Nagacash/Punani-AI)** (this repo) | Landing + waitlist |
+| **[Punani-Power-Agent](https://github.com/Nagacash/Punani-Power-Agent)** | Agent source (`punani-powerd` on npm) |
+
+**Contributing:** `main` is protected — fork and open a pull request. See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ### Run locally
 
