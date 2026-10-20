@@ -22,6 +22,9 @@
 # production
 /build
 
+# agent / local design audits (screenshots, audit.mjs output)
+/.review/
+
 # misc
 .DS_Store
 ._*

@@ -76,6 +76,8 @@ npx -y clerk@latest env pull --file .env.local
 
 Production: **`pk_live_` / `sk_live_`** on Vercel only. Keep **`pk_test_`** in `.env.local` for localhost.
 
+**Waitlist:** In the Clerk dashboard (dev **and** production instances), turn on **Waitlist** and leave **Google / SSO off**. **Join the list** is email-only via Clerk’s waitlist modal.
+
 ---
 
 ## Install the agent (end users)

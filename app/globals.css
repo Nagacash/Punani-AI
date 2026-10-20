@@ -243,7 +243,8 @@ code, .mono { font: 12.5px/1.6 var(--mono); }
 .signup > .core { border-radius: 24px; background: var(--surface); border: 1px solid var(--hair); padding: 38px 34px; }
 .signup h2 { margin-bottom: 12px; }
 .signup p { color: var(--paper-dim); margin: 0 0 26px; }
-.signup form { display: flex; gap: 10px; flex-wrap: wrap; }
+.signup form { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.signup form button.btn { flex-shrink: 0; border: 1px solid var(--gold); }
 .signup input[type="email"] {
   flex: 1; min-width: 220px; padding: 14px 18px; border-radius: 999px;
   background: #080706; border: 1px solid var(--hair); color: var(--paper); font: 14px var(--sans);

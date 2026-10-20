@@ -1,4 +1,4 @@
-import { JoinButton } from "./join-button"
+import { JoinButton, JoinWaitlistForm } from "./join-button"
 import { LOCAL_APP_URL, isHostedSite } from "./app-link"
 
 const REPO = "https://github.com/Nagacash/Punani-AI"
@@ -28,6 +28,9 @@ export default function Page() {
             <a href="#showcase" className="hide">
               Product
             </a>
+            <a href="#for-you" className="hide">
+              Who it&apos;s for
+            </a>
             <a href="#what" className="hide">
               Features
             </a>
@@ -47,7 +50,13 @@ export default function Page() {
       <main>
         <section className="hero">
           <div className="hero-bg" aria-hidden>
-            <img src="/media/hero-atmosphere.jpg" alt="" />
+            <img
+              src="/media/hero-atmosphere.jpg"
+              alt=""
+              width={2720}
+              height={1536}
+              fetchPriority="high"
+            />
           </div>
           <div className="shell hero-inner">
             <img className="mark" src="/logo.png" alt="Punani AI" width={108} height={126} />
@@ -59,9 +68,10 @@ export default function Page() {
               The coding agent that <em>asks before it touches</em> your repo.
             </h1>
             <p className="hero-lede">
-              Terminal, browser, and MCP — one engine, your keys, your machine. Every write and
-              every shell command waits for you. Every edit shows a diff first. Free models ranked
-              first.
+              A full coding agent — not a stripped-down toy — built for people who live on free
+              models and for people who plug in OpenAI, Groq, or whatever you already pay for.
+              Your keys, your machine. Every write and shell command waits for you; every edit
+              shows a diff first. Free tiers ranked first when limits hit.
             </p>
             <div className="cta">
               <a className="btn" href={LOCAL_APP_URL}>
@@ -94,6 +104,51 @@ export default function Page() {
                 <span className="stat-l">{s.label}</span>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section id="for-you">
+          <div className="shell">
+            <p className="eyebrow">What makes Punani different</p>
+            <h2>Free coding that still feels pro — or bring the keys you already have.</h2>
+            <p className="lede center">
+              No subscription to us. No lock-in. Same permission engine and diff-first edits whether
+              your bill is $0 or you run frontier models on your own dime.
+            </p>
+            <div className="grid two">
+              <div className="card glow">
+                <div className="core">
+                  <span className="card-icon">◎</span>
+                  <h3>Built for the free-model crew</h3>
+                  <p>
+                    For builders who love free tiers, run local Ollama, or simply cannot justify
+                    $20/month agents. OpenRouter free models, Groq and Cerebras speed, NVIDIA NIM
+                    credits, FreeLLMAPI failover — ranked so a 429 sends you to the next option,
+                    not a paywall.
+                  </p>
+                  <p className="small" style={{ marginTop: 12, marginBottom: 0 }}>
+                    Start with <b>punani --init</b>, pick a free model, ship real code with tools,
+                    MCP, and previews — not a demo chatbot.
+                  </p>
+                </div>
+              </div>
+              <div className="card">
+                <div className="core">
+                  <span className="card-icon">⬡</span>
+                  <h3>Bring OpenAI, Grok, or any key</h3>
+                  <p>
+                    Already paying for OpenAI, Anthropic, Groq, or routes through OpenRouter?
+                    Paste your key once — stored on your machine or only in the browser if you
+                    prefer. Swap models from live catalogs with pricing shown up front. Punani
+                    does not resell tokens; it orchestrates your stack.
+                  </p>
+                  <p className="small" style={{ marginTop: 12, marginBottom: 0 }}>
+                    One agent loop in terminal and <b>punani web</b>. Same rules. Same diffs. Your
+                    choice of brain.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -235,7 +290,7 @@ export default function Page() {
                   One email when something worth knowing lands — a provider, a tool, a model that
                   still has quota. No drip campaign.
                 </p>
-                <JoinButton />
+                <JoinWaitlistForm />
                 <p className="small">
                   Your email is stored by Clerk so we can send those notes. No analytics.{" "}
                   <a href="https://nagacodex.cloud/datenschutz.html">Datenschutz</a>. Unsubscribe
