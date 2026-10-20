@@ -1,7 +1,9 @@
+import Link from "next/link"
 import { JoinButton, JoinWaitlistForm } from "./join-button"
 import { LOCAL_APP_URL, isHostedSite } from "./app-link"
 
 const REPO = "https://github.com/Nagacash/Punani-AI"
+const AGENT_REPO = "https://github.com/Nagacash/Punani-Power-Agent"
 
 const STATS = [
   { n: "8", label: "model providers" },
@@ -17,13 +19,13 @@ export default function Page() {
     <>
       <header>
         <div className="shell head">
-          <a href="/" className="brand" aria-label="Punani AI home">
+          <Link href="/" className="brand" aria-label="Punani AI home">
             <img src="/logo.png" alt="" width={30} height={35} />
             <span className="wordmark">
               <b>Punani AI</b>
               <span>powerd · naga codex</span>
             </span>
-          </a>
+          </Link>
           <nav>
             <a href="#showcase" className="hide">
               Product
@@ -256,11 +258,15 @@ export default function Page() {
                 </li>
               </div>
               <p className="repo-line">
-                Landing &amp; signup:{" "}
-                <a href={REPO} target="_blank" rel="noreferrer noopener">
-                  github.com/Nagacash/Punani-AI
+                Agent:{" "}
+                <a href={AGENT_REPO} target="_blank" rel="noreferrer noopener">
+                  Punani-Power-Agent
                 </a>
-                · Live at{" "}
+                · Landing:{" "}
+                <a href={REPO} target="_blank" rel="noreferrer noopener">
+                  Punani-AI
+                </a>
+                ·{" "}
                 <a href="https://punani.agency">punani.agency</a>
               </p>
             </div>
