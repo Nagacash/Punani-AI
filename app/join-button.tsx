@@ -1,6 +1,5 @@
 "use client"
 
-import { useWaitlist } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
 import { type FormEvent, useState } from "react"
 
@@ -13,9 +12,8 @@ export function JoinButton() {
   )
 }
 
-/** Email-only waitlist in the #join section. */
+/** Email-only waitlist in the #join section (via Clerk Backend API). */
 export function JoinWaitlistForm() {
-  const { waitlist } = useWaitlist()
   const router = useRouter()
   const [email, setEmail] = useState("")
   const [submitting, setSubmitting] = useState(false)
@@ -33,21 +31,25 @@ export function JoinWaitlistForm() {
     e.preventDefault()
     const address = email.trim()
     if (!address) return
-    if (!waitlist) {
-      setError("Still loading — try again in a second.")
-      return
-    }
 
     setSubmitting(true)
     setError(null)
-    const { error: clerkError } = await waitlist.join({ emailAddress: address })
+
+    const res = await fetch("/api/waitlist", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ email: address }),
+    })
+
     setSubmitting(false)
 
-    if (clerkError) {
-      setError(clerkError.message ?? "Could not join the list. Try again.")
+    if (res.ok) {
+      router.push("/thanks")
       return
     }
-    router.push("/thanks")
+
+    const data = (await res.json().catch(() => null)) as { error?: string } | null
+    setError(data?.error ?? "Could not join the list. Try again.")
   }
 
   return (

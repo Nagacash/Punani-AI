@@ -52,6 +52,9 @@
 
 The agent CLI is **`punani-powerd`** on npm (package name `punani-powerd`, command `punani`).
 
+This repo is **only the landing page** (Next.js + Clerk). The “one dependency” pitch
+applies to **`punani-powerd`**, not this site.
+
 **Most people never clone this repo.** Install the agent once globally, use your own API keys, and run `punani` or `punani web`. Clone **Punani-AI** only if you contribute to the site; clone **punani-powerd** only if you hack on the agent itself.
 
 ### Run locally
