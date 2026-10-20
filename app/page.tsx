@@ -2,22 +2,38 @@ import { JoinButton } from "./join-button"
 
 /** Where the running agent listens. The app is local-first. */
 const APP_URL = "http://localhost:4096"
+const REPO = "https://github.com/Nagacash/Punani-AI"
+
+const STATS = [
+  { n: "8", label: "model providers" },
+  { n: "34", label: "automated tests" },
+  { n: "0", label: "surprise writes" },
+  { n: "MIT", label: "open source" },
+] as const
 
 export default function Page() {
   return (
     <>
       <header>
         <div className="shell head">
-          <img src="/logo.png" alt="" width={30} height={35} />
-          <span className="wordmark">
-            <b>Punani AI</b>
-            <span>powerd · naga codex</span>
-          </span>
+          <a href="/" className="brand" aria-label="Punani AI home">
+            <img src="/logo.png" alt="" width={30} height={35} />
+            <span className="wordmark">
+              <b>Punani AI</b>
+              <span>powerd · naga codex</span>
+            </span>
+          </a>
           <nav>
-            <a href="#what" className="hide">What it does</a>
-            <a href="#install" className="hide">Install</a>
-            <a href="#join" className="hide">Join</a>
-            <a href="https://github.com/Nagacash" target="_blank" rel="noreferrer noopener">
+            <a href="#showcase" className="hide">
+              Product
+            </a>
+            <a href="#what" className="hide">
+              Features
+            </a>
+            <a href="#install" className="hide">
+              Install
+            </a>
+            <a href={REPO} target="_blank" rel="noreferrer noopener">
               GitHub
             </a>
             <a className="btn" href={APP_URL}>
@@ -29,67 +45,108 @@ export default function Page() {
 
       <main>
         <section className="hero">
-          <div className="shell">
+          <div className="hero-bg" aria-hidden>
+            <img src="/media/hero-atmosphere.jpg" alt="" />
+          </div>
+          <div className="shell hero-inner">
             <img className="mark" src="/logo.png" alt="Punani AI" width={108} height={126} />
-            <span className="tag">Free and open source</span>
+            <span className="tag">
+              <span className="pulse" />
+              Free · open source · production-grade permissions
+            </span>
             <h1>
-              A coding agent that <em>asks before it touches</em> your code.
+              The coding agent that <em>asks before it touches</em> your repo.
             </h1>
-            <p>
-              Punani AI reads, searches, edits and runs — in your terminal or in the browser. Every
-              write and every command waits for your approval, and every edit shows a diff first.
-              Bring your own model key, including the free ones.
+            <p className="hero-lede">
+              Terminal, browser, and MCP — one engine, your keys, your machine. Every write and
+              every shell command waits for you. Every edit shows a diff first. Free models ranked
+              first.
             </p>
             <div className="cta">
               <a className="btn" href={APP_URL}>
                 <span className="orb">↗</span> Open the app
               </a>
               <a className="btn ghost" href="#install">
-                <span className="orb">↓</span> Install it
+                <span className="orb">↓</span> Install in 60s
               </a>
-              <a className="btn ghost" href="#join">
-                <span className="orb">✉</span> Get the updates
-              </a>
+              <JoinButton />
             </div>
             <p className="note">
-              The agent runs on your own machine. Start it with <b>punani web</b> and this button opens it.
+              Local-first: run <b>punani web</b>, paste the token once, or use <b>punani web --open</b>.
             </p>
+          </div>
+          <div className="shell stats">
+            {STATS.map((s) => (
+              <div key={s.label} className="stat">
+                <span className="stat-n">{s.n}</span>
+                <span className="stat-l">{s.label}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="showcase" className="showcase">
+          <div className="shell">
+            <p className="eyebrow">Built like a paid product</p>
+            <h2>Looks expensive. Costs nothing but your API key.</h2>
+            <p className="lede center">
+              A full agent loop — read, search, edit, run, generate image and audio — with
+              permission cards, live preview, and resumable sessions. No black-box rewrites.
+            </p>
+            <div className="frame">
+              <div className="frame-bar">
+                <span />
+                <span />
+                <span />
+                <span className="frame-title">punani web · local session</span>
+              </div>
+              <img
+                src="/media/product-showcase.jpg"
+                alt="Punani AI browser interface with chat, permissions, and code diff preview"
+                width={1920}
+                height={1080}
+                loading="lazy"
+              />
+            </div>
           </div>
         </section>
 
         <section id="what">
           <div className="shell">
-            <p className="eyebrow">What it does</p>
-            <h2>Three ways in, one engine underneath.</h2>
+            <p className="eyebrow">What you get</p>
+            <h2>Three surfaces. One disciplined engine.</h2>
             <p className="lede">
-              The terminal, the browser and every MCP server you add all drive the same agent
-              loop, the same permission rules and the same session log.
+              Same permission rules in the terminal and the browser. Last match wins. Free providers
+              surface first when something rate-limits.
             </p>
             <div className="grid three">
               <div className="card">
                 <div className="core">
-                  <h3>Terminal</h3>
+                  <span className="card-icon">⌘</span>
+                  <h3>Terminal agent</h3>
                   <p>
-                    A full coding agent in your shell. Permissions, diffs, resumable sessions and
-                    slash commands for every provider you have configured.
+                    Slash commands, resumable JSONL sessions, diff preview before every write, and
+                    error messages that name the fix.
                   </p>
                 </div>
               </div>
               <div className="card">
                 <div className="core">
-                  <h3>Browser</h3>
+                  <span className="card-icon">◈</span>
+                  <h3>Browser command center</h3>
                   <p>
-                    The same agent, with a live preview pane beside the chat, a folder browser for
-                    picking a project, and a settings panel for your keys.
+                    SSE chat, native folder picker, live preview pane, settings for keys on disk or
+                    in the browser only.
                   </p>
                 </div>
               </div>
               <div className="card">
                 <div className="core">
-                  <h3>Your models</h3>
+                  <span className="card-icon">∞</span>
+                  <h3>Model freedom</h3>
                   <p>
-                    OpenRouter, NVIDIA NIM, Groq, Cerebras, OpenAI, FreeLLMAPI, Ollama and LM
-                    Studio. Free tiers first, and the price of every model shown before you use it.
+                    OpenRouter, NVIDIA NIM, Groq, Cerebras, OpenAI, FreeLLMAPI, Ollama, LM Studio —
+                    live catalogs and real pricing.
                   </p>
                 </div>
               </div>
@@ -101,10 +158,9 @@ export default function Page() {
           <div className="shell grid two">
             <div>
               <p className="eyebrow">Install</p>
-              <h2>One command, then point it at a model.</h2>
+              <h2>Ship in one terminal.</h2>
               <p className="lede">
-                The wizard asks for a provider and a key, then lists the models that provider
-                actually serves right now.
+                Global CLI, wizard for provider + key, then pick a free model and go.
               </p>
               <div className="list">
                 <li>
@@ -129,20 +185,27 @@ export default function Page() {
                   </span>
                 </li>
               </div>
+              <p className="repo-line">
+                Landing &amp; signup:{" "}
+                <a href={REPO} target="_blank" rel="noreferrer noopener">
+                  github.com/Nagacash/Punani-AI
+                </a>
+                · Live at{" "}
+                <a href="https://punani.agency">punani.agency</a>
+              </p>
             </div>
-            <div className="card">
+            <div className="card glow">
               <div className="core">
-                <h3>Free from the first prompt</h3>
+                <h3>Free tier, honest defaults</h3>
                 <p style={{ marginBottom: 4 }}>
-                  FreeLLMAPI routes to whichever provider still has quota and fails over when one
-                  is rate limited. OpenRouter and NVIDIA NIM have free tiers too.
+                  OpenRouter free models, NVIDIA NIM credits, FreeLLMAPI failover — ranked so you
+                  are not stuck behind a 429.
                 </p>
                 <code className="cmd">
                   <b>$</b> punani --init
                   {"\n"}provider   openrouter
-                  {"\n"}key        sk-or-v1-…
-                  {"\n"}model      openrouter/nvidia/nemotron-3-super-120b-a12b:free
-                  {"\n\n"}<b>✓</b> ready — ctx 262k · tools ✔ · free
+                  {"\n"}model      openrouter/minimax/minimax-m3.1-flash:free
+                  {"\n\n"}<b>✓</b> ready — ctx 1.0M · tools ✔ · free
                 </code>
               </div>
             </div>
@@ -153,18 +216,18 @@ export default function Page() {
           <div className="shell">
             <div className="signup">
               <div className="core">
-                <p className="eyebrow">Stay in the loop</p>
-                <h2>Get the releases and the good free models.</h2>
+                <img className="signup-mark" src="/logo.png" alt="" width={48} height={56} />
+                <p className="eyebrow">Inner circle</p>
+                <h2>Releases, free models, zero noise.</h2>
                 <p>
-                  An occasional email when something lands — a new provider, a new tool, a model
-                  worth knowing about. Nothing else.
+                  One email when something worth knowing lands — a provider, a tool, a model that
+                  still has quota. No drip campaign.
                 </p>
                 <JoinButton />
                 <p className="small">
-                  Your email is stored by Clerk so we can send those notes. No analytics.
-                  Details are in the{" "}
-                  <a href="https://nagacodex.cloud/datenschutz.html">Datenschutz</a>.
-                  Delete it any time by replying to a mail from us.
+                  Your email is stored by Clerk so we can send those notes. No analytics.{" "}
+                  <a href="https://nagacodex.cloud/datenschutz.html">Datenschutz</a>. Unsubscribe
+                  by replying to any mail from us.
                 </p>
               </div>
             </div>
@@ -184,7 +247,7 @@ export default function Page() {
             <a href="https://nagacodex.cloud/datenschutz.html" target="_blank" rel="noreferrer noopener">
               Datenschutz
             </a>
-            <a href="https://github.com/Nagacash" target="_blank" rel="noreferrer noopener">
+            <a href={REPO} target="_blank" rel="noreferrer noopener">
               GitHub
             </a>
             <a href="mailto:chosenfewrecords@hotmail.de">Contact</a>
