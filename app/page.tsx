@@ -160,20 +160,23 @@ export default function Page() {
               A full agent loop — read, search, edit, run, generate image and audio — with
               permission cards, live preview, and resumable sessions. No black-box rewrites.
             </p>
-            <div className="frame">
+            <div className="frame frame-spice">
               <div className="frame-bar">
                 <span />
                 <span />
                 <span />
-                <span className="frame-title">punani web · local session</span>
+                <span className="frame-title">punani · permission to touch</span>
               </div>
-              <img
-                src="/media/product-showcase.jpg"
-                alt="Punani AI browser interface with chat, permissions, and code diff preview"
-                width={1920}
-                height={1080}
-                loading="lazy"
-              />
+              <div className="frame-media">
+                <img
+                  src="/media/showcase-spice.jpg"
+                  alt="Punani AI — cinematic brand visual"
+                  width={1920}
+                  height={1080}
+                  loading="lazy"
+                />
+                <div className="frame-shine" aria-hidden />
+              </div>
             </div>
           </div>
         </section>

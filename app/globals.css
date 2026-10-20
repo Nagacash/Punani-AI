@@ -178,7 +178,22 @@ header {
   margin-left: auto; font: 500 10px/1 var(--mono); letter-spacing: 0.12em;
   text-transform: uppercase; color: var(--paper-faint);
 }
+.frame-media { position: relative; overflow: hidden; }
 .frame img { display: block; width: 100%; height: auto; vertical-align: middle; }
+.frame-spice img {
+  width: 100%;
+  max-height: min(72vh, 720px);
+  object-fit: cover;
+  object-position: center 22%;
+  filter: saturate(1.08) contrast(1.04);
+}
+.frame-spice .frame-shine {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(105deg, transparent 40%, rgba(204, 180, 120, 0.12) 50%, transparent 60%),
+    linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+}
+.frame-spice .frame-bar { border-bottom-color: rgba(204, 180, 120, 0.22); }
 
 .card-icon {
   display: inline-flex; width: 36px; height: 36px; border-radius: 12px;
