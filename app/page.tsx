@@ -1,7 +1,6 @@
 import { JoinButton } from "./join-button"
+import { LOCAL_APP_URL, appCallToAction } from "./app-link"
 
-/** Where the running agent listens. The app is local-first. */
-const APP_URL = "http://localhost:4096"
 const REPO = "https://github.com/Nagacash/Punani-AI"
 
 const STATS = [
@@ -12,6 +11,8 @@ const STATS = [
 ] as const
 
 export default function Page() {
+  const app = appCallToAction()
+
   return (
     <>
       <header>
@@ -36,8 +37,8 @@ export default function Page() {
             <a href={REPO} target="_blank" rel="noreferrer noopener">
               GitHub
             </a>
-            <a className="btn" href={APP_URL}>
-              <span className="orb">↗</span> Open the app
+            <a className="btn" href={app.href}>
+              <span className="orb">{app.hosted ? "↓" : "↗"}</span> {app.label}
             </a>
           </nav>
         </div>
@@ -63,8 +64,8 @@ export default function Page() {
               first.
             </p>
             <div className="cta">
-              <a className="btn" href={APP_URL}>
-                <span className="orb">↗</span> Open the app
+              <a className="btn" href={app.href}>
+                <span className="orb">{app.hosted ? "↓" : "↗"}</span> {app.label}
               </a>
               <a className="btn ghost" href="#install">
                 <span className="orb">↓</span> Install in 60s
@@ -72,7 +73,17 @@ export default function Page() {
               <JoinButton />
             </div>
             <p className="note">
-              Local-first: run <b>punani web</b>, paste the token once, or use <b>punani web --open</b>.
+              {app.hosted ? (
+                <>
+                  The agent runs on <b>your</b> computer, not on this website. Install below, then{" "}
+                  <b>punani web</b> opens <b>{LOCAL_APP_URL}</b> on that machine.
+                </>
+              ) : (
+                <>
+                  Local-first: run <b>punani web</b>, paste the token once, or use{" "}
+                  <b>punani web --open</b>.
+                </>
+              )}
             </p>
           </div>
           <div className="shell stats">
@@ -178,10 +189,15 @@ export default function Page() {
                 <li>
                   <span className="k">browser</span>
                   <span className="v">
-                    punani web{" "}
-                    <a href={APP_URL} style={{ color: "var(--gold)" }}>
-                      — open it now
-                    </a>
+                    punani web
+                    {!app.hosted && (
+                      <>
+                        {" "}
+                        <a href={LOCAL_APP_URL} style={{ color: "var(--gold)" }}>
+                          — open it now
+                        </a>
+                      </>
+                    )}
                   </span>
                 </li>
               </div>
