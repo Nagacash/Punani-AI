@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { JoinButton, JoinWaitlistForm } from "./join-button"
+import { PromoVideo } from "./promo-video"
 import { LOCAL_APP_URL, isHostedSite } from "./app-link"
 
 const REPO = "https://github.com/Nagacash/Punani-AI"
@@ -180,6 +181,7 @@ export default function Page() {
                 <div className="frame-shine" aria-hidden />
               </div>
             </div>
+            <PromoVideo />
           </div>
         </section>
 

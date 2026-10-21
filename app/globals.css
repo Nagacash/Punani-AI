@@ -187,6 +187,18 @@ header {
   object-position: center 22%;
   filter: saturate(1.08) contrast(1.04);
 }
+.frame-promo { margin-top: 28px; }
+.frame-play {
+  margin-left: 14px; width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid var(--hair); background: rgba(204, 180, 120, 0.08);
+  color: var(--gold); font-size: 9px; line-height: 1; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.frame-play:hover { background: rgba(204, 180, 120, 0.16); }
+.frame-promo video {
+  display: block; width: 100%; height: auto;
+  max-height: min(72vh, 720px); object-fit: cover; background: var(--void);
+}
 .frame-spice .frame-shine {
   position: absolute; inset: 0; pointer-events: none;
   background:

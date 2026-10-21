@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>punani — asks before it touches your repo</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --void: #060505;
+        --surface: #0c0b09;
+        --shell: #17140e;
+        --hair: rgba(204, 180, 120, 0.16);
+        --hair-soft: rgba(204, 180, 120, 0.08);
+        --gold: #ccb478;
+        --gold-bright: #e6d5a4;
+        --gold-dim: #8a7746;
+        --paper: #ece4d2;
+        --paper-dim: #9a927f;
+        --paper-faint: #827e73;
+        --ok: #7fb069;
+        --warn: #d98a5a;
+        --mono: ui-monospace, monospace;
+        --sans: system-ui, sans-serif;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--void);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        font-family: var(--mono);
+        color: var(--paper);
+      }
+      .clip {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .grain {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(1100px 620px at 22% 8%, rgba(204, 180, 120, 0.07), transparent 70%),
+          radial-gradient(900px 520px at 84% 96%, rgba(204, 180, 120, 0.05), transparent 72%);
+      }
+      .terminal {
+        width: 1340px;
+        background: var(--surface);
+        border: 1px solid var(--hair);
+        border-radius: 18px;
+        box-shadow: 0 40px 120px rgba(0, 0, 0, 0.55);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .bar {
+        height: 58px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 0 26px;
+        border-bottom: 1px solid var(--hair-soft);
+        background: var(--shell);
+        font-size: 20px;
+        color: var(--paper-dim);
+        letter-spacing: 0.04em;
+      }
+      .dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: var(--gold-dim);
+      }
+      .bar .name {
+        color: var(--gold);
+      }
+      .bar .where {
+        margin-left: auto;
+        color: var(--paper-faint);
+      }
+      .shot {
+        position: relative;
+        overflow: hidden;
+        background: #000;
+        line-height: 0;
+      }
+      .shot img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .caption {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 22px 8px 0;
+        font-size: 24px;
+        color: var(--paper-dim);
+      }
+      .caption b {
+        color: var(--gold);
+        font-weight: 600;
+      }
+      .ask {
+        color: var(--paper);
+      }
+      .caret {
+        color: var(--gold);
+        font-weight: 700;
+        margin-right: 14px;
+      }
+      .tool {
+        color: var(--paper-faint);
+        font-size: 24px;
+      }
+      .tool b {
+        color: var(--gold-dim);
+        font-weight: 600;
+      }
+      .diff {
+        border-left: 2px solid var(--hair);
+        padding-left: 26px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 25px;
+      }
+      .del {
+        color: #b8776a;
+      }
+      .add {
+        color: var(--ok);
+      }
+      .cursor {
+        display: inline-block;
+        width: 15px;
+        height: 30px;
+        background: var(--gold);
+        vertical-align: -5px;
+        margin-left: 4px;
+      }
+      .permit {
+        width: 1160px;
+        background: var(--surface);
+        border: 1px solid var(--hair);
+        border-radius: 18px;
+        box-shadow: 0 40px 120px rgba(0, 0, 0, 0.55);
+        padding: 42px 46px 38px;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        font-size: 27px;
+      }
+      .chip {
+        align-self: flex-start;
+        background: var(--gold);
+        color: #14110a;
+        font-weight: 700;
+        font-size: 21px;
+        letter-spacing: 0.09em;
+        padding: 9px 16px;
+        border-radius: 6px;
+      }
+      .cmd {
+        color: var(--paper);
+      }
+      .warn {
+        color: var(--warn);
+      }
+      .answers {
+        display: flex;
+        gap: 30px;
+        color: var(--paper-faint);
+        font-size: 25px;
+      }
+      .answers b {
+        color: var(--paper-dim);
+        font-weight: 600;
+      }
+      .answers .picked {
+        color: var(--gold);
+      }
+      .answers .picked b {
+        color: var(--gold-bright);
+      }
+      .final {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+      }
+      .word {
+        font-family: var(--sans);
+        font-size: 118px;
+        font-weight: 700;
+        letter-spacing: -0.045em;
+        color: var(--paper);
+      }
+      .word em {
+        font-style: normal;
+        color: var(--gold);
+      }
+      .tag {
+        font-size: 27px;
+        color: var(--paper-dim);
+        letter-spacing: 0.05em;
+      }
+      .foot {
+        font-size: 23px;
+        color: var(--paper-faint);
+        letter-spacing: 0.09em;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-width="1920"
+      data-height="1080"
+      data-duration="12"
+    >
+      <div class="grain"></div>
+
+      <!-- 1. The real thing. -->
+      <section class="clip" id="scene-work" data-start="0" data-duration="4.6">
+        <div class="terminal">
+          <div class="bar">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="name">punani</span>
+            <span class="where">terminal</span>
+          </div>
+          <div class="shot" id="shot">
+            <img id="cli" src="assets/cli.png" alt="The punani terminal, showing the model, the project and the skills" />
+          </div>
+          <div class="caption" id="caption">
+            <b>1,038 skills</b> on your machine, and the model that reads them
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. The one question worth asking. -->
+      <section class="clip" id="scene-ask" data-start="4.6" data-duration="4">
+        <div class="permit">
+          <div class="chip" id="chip">BASH (DESTRUCTIVE)</div>
+          <div class="cmd" id="cmd">Run: rm -rf ./build</div>
+          <div class="warn" id="warn">! This action can destroy or overwrite data.</div>
+          <div class="answers" id="answers">
+            <span><b>y</b> once</span>
+            <span class="picked"><b>y</b> once</span>
+            <span><b>n</b> reject</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. The point. -->
+      <section class="clip" id="scene-end" data-start="8.6" data-duration="3.4">
+        <div class="final">
+          <div class="word" id="word">punani</div>
+          <div class="tag" id="tag">asks before it touches your repo</div>
+          <div class="foot" id="foot">free · open source · your keys, your machine</div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      /* 1. The work. */
+      tl.from("#scene-work .terminal", { y: 34, opacity: 0, duration: 0.6, ease: "power3.out" }, 0.1)
+        .from("#shot", { opacity: 0, duration: 0.7, ease: "power2.out" }, 0.4)
+        .from("#caption", { y: 18, opacity: 0, duration: 0.5, ease: "power3.out" }, 1.6)
+        .fromTo("#cli", { scale: 1 }, { scale: 1.035, duration: 4.2, ease: "none" }, 0.4);
+
+      /* 2. The question. */
+      tl.from("#chip", { y: 20, opacity: 0, duration: 0.4, ease: "power3.out" }, 4.75)
+        .from("#cmd", { y: 20, opacity: 0, duration: 0.4, ease: "power3.out" }, 5.0)
+        .from("#warn", { y: 20, opacity: 0, duration: 0.4, ease: "power3.out" }, 5.25)
+        .from("#answers", { y: 20, opacity: 0, duration: 0.4, ease: "power3.out" }, 5.5);
+
+      /* 3. The point. */
+      tl.from("#word", { y: 34, opacity: 0, duration: 0.7, ease: "power3.out" }, 8.75)
+        .from("#tag", { y: 24, opacity: 0, duration: 0.55, ease: "power3.out" }, 9.2)
+        .from("#foot", { y: 24, opacity: 0, duration: 0.55, ease: "power3.out" }, 9.5);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
