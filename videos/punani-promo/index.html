@@ -58,8 +58,7 @@
           radial-gradient(900px 520px at 84% 96%, rgba(204, 180, 120, 0.05), transparent 72%);
       }
       .terminal {
-        width: 1360px;
-        height: 560px;
+        width: 1340px;
         background: var(--surface);
         border: 1px solid var(--hair);
         border-radius: 18px;
@@ -93,14 +92,28 @@
         margin-left: auto;
         color: var(--paper-faint);
       }
-      .body {
-        flex: 1;
-        padding: 36px 46px;
+      .shot {
+        position: relative;
+        overflow: hidden;
+        background: #000;
+        line-height: 0;
+      }
+      .shot img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .caption {
         display: flex;
-        flex-direction: column;
-        gap: 26px;
-        font-size: 27px;
-        line-height: 1.5;
+        align-items: center;
+        gap: 16px;
+        padding: 22px 8px 0;
+        font-size: 24px;
+        color: var(--paper-dim);
+      }
+      .caption b {
+        color: var(--gold);
+        font-weight: 600;
       }
       .ask {
         color: var(--paper);
@@ -223,7 +236,7 @@
     >
       <div class="grain"></div>
 
-      <!-- 1. The agent working. -->
+      <!-- 1. The real thing. -->
       <section class="clip" id="scene-work" data-start="0" data-duration="4.6">
         <div class="terminal">
           <div class="bar">
@@ -231,16 +244,13 @@
             <span class="dot"></span>
             <span class="dot"></span>
             <span class="name">punani</span>
-            <span class="where">~/sounddrop</span>
+            <span class="where">terminal</span>
           </div>
-          <div class="body">
-            <div class="ask" id="ask"><span class="caret">›</span>fix the contrast on the landing page</div>
-            <div class="tool" id="tool"><b>read</b> web/app/page.tsx</div>
-            <div class="diff" id="diff">
-              <div class="del">- color: rgba(244,239,230,.42);</div>
-              <div class="add">+ color: rgba(244,239,230,.62);</div>
-            </div>
-            <div class="ask" id="tail">done, and it still looks the same<span class="cursor" id="cursor"></span></div>
+          <div class="shot" id="shot">
+            <img id="cli" src="assets/cli.png" alt="The punani terminal, showing the model, the project and the skills" />
+          </div>
+          <div class="caption" id="caption">
+            <b>1,038 skills</b> on your machine, and the model that reads them
           </div>
         </div>
       </section>
@@ -274,11 +284,9 @@
 
       /* 1. The work. */
       tl.from("#scene-work .terminal", { y: 34, opacity: 0, duration: 0.6, ease: "power3.out" }, 0.1)
-        .from("#ask", { y: 26, opacity: 0, duration: 0.5, ease: "power3.out" }, 0.45)
-        .from("#tool", { y: 18, opacity: 0, duration: 0.45, ease: "power3.out" }, 0.9)
-        .from("#diff", { y: 18, opacity: 0, duration: 0.5, ease: "power3.out" }, 1.45)
-        .from("#tail", { y: 18, opacity: 0, duration: 0.45, ease: "power3.out" }, 2.2)
-        .to("#cursor", { opacity: 0, duration: 0.45, repeat: 6, ease: "none" }, 2.6);
+        .from("#shot", { opacity: 0, duration: 0.7, ease: "power2.out" }, 0.4)
+        .from("#caption", { y: 18, opacity: 0, duration: 0.5, ease: "power3.out" }, 1.6)
+        .fromTo("#cli", { scale: 1 }, { scale: 1.035, duration: 4.2, ease: "none" }, 0.4);
 
       /* 2. The question. */
       tl.from("#chip", { y: 20, opacity: 0, duration: 0.4, ease: "power3.out" }, 4.75)
