@@ -187,6 +187,11 @@ header {
   object-position: center 22%;
   filter: saturate(1.08) contrast(1.04);
 }
+.frame-promo { margin-top: 28px; }
+.frame-promo video {
+  display: block; width: 100%; height: auto;
+  max-height: min(72vh, 720px); object-fit: cover; background: var(--void);
+}
 .frame-spice .frame-shine {
   position: absolute; inset: 0; pointer-events: none;
   background:
