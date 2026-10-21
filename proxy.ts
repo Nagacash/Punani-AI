@@ -16,6 +16,11 @@ const hasKeys = Boolean(
 
 export default function proxy(request: NextRequest, event: NextFetchEvent) {
   if (!hasKeys) return NextResponse.next()
+  // A framed request is a preview, in the app's preview pane. Clerk's session
+  // handshake redirects in a frame, and the browser gives up with "redirected
+  // you too many times", so the frame is left alone.
+  const framed = request.headers.get("sec-fetch-dest") === "iframe"
+  if (framed) return NextResponse.next()
   return handler(request, event)
 }
 

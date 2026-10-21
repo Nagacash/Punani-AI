@@ -1,4 +1,20 @@
+import type { Metadata } from "next"
 import Link from "next/link"
+
+/**
+ * A confirmation screen has nothing to rank. It is kept out of the index and
+ * out of the sitemap, and it gets its own title so it never borrows the
+ * homepage's title in a search result or a shared tab.
+ */
+export const metadata: Metadata = {
+  title: { absolute: "You are on the list — Punani AI" },
+  description: "Your Punani AI waitlist signup is confirmed.",
+  alternates: { canonical: "/thanks" },
+  robots: {
+    index: false,
+    follow: true,
+  },
+}
 
 export default function ThanksPage() {
   return (
