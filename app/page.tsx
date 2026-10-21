@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { JoinButton, JoinWaitlistForm } from "./join-button"
+import { PromoVideo } from "./promo-video"
 import { LOCAL_APP_URL, isHostedSite } from "./app-link"
 
 const REPO = "https://github.com/Nagacash/Punani-AI"
@@ -180,27 +181,7 @@ export default function Page() {
                 <div className="frame-shine" aria-hidden />
               </div>
             </div>
-            <div className="frame frame-promo">
-              <div className="frame-bar">
-                <span />
-                <span />
-                <span />
-                <span className="frame-title">punani · twelve seconds</span>
-              </div>
-              <div className="frame-media">
-                <video
-                  src="/media/punani-promo.mp4"
-                  width={1920}
-                  height={1080}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  aria-label="Punani AI — the agent working, and asking once before it deletes anything"
-                />
-              </div>
-            </div>
+            <PromoVideo />
           </div>
         </section>
 
