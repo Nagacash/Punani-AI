@@ -1,27 +1,39 @@
+import Image from "next/image"
 import Link from "next/link"
 import { JoinButton, JoinWaitlistForm } from "./join-button"
 import { PromoVideo } from "./promo-video"
 import { LOCAL_APP_URL, isHostedSite } from "./app-link"
+import { buildHomeJsonLd } from "@/lib/jsonld"
+import { FAQ, OWNER, REPO_URL, AGENT_REPO_URL, SERVICES } from "@/lib/site"
 
-const REPO = "https://github.com/Nagacash/Punani-AI"
-const AGENT_REPO = "https://github.com/Nagacash/Punani-Power-Agent"
-
-const STATS = [
-  { n: "8", label: "model providers" },
-  { n: "34", label: "automated tests" },
-  { n: "0", label: "surprise writes" },
-  { n: "MIT", label: "open source" },
+const PROVIDERS = [
+  { name: "OpenRouter", kind: "Free tier first", note: "Hundreds of models, free variants ranked ahead of paid." },
+  { name: "NVIDIA NIM", kind: "Free credits", note: "Hosted open models on NVIDIA's free tier." },
+  { name: "Groq", kind: "Fast free tier", note: "Very fast inference on the free allowance." },
+  { name: "Cerebras", kind: "Free tier", note: "Fast inference for open-weight models." },
+  { name: "OpenAI", kind: "Bring your key", note: "Your own key, your own bill, your choice of model." },
+  { name: "FreeLLMAPI", kind: "Failover", note: "Automatic fallback when a provider rate-limits." },
+  { name: "Ollama", kind: "Local", note: "Run open models on your own hardware, fully offline." },
+  { name: "LM Studio", kind: "Local", note: "Local server with live model discovery." },
 ] as const
 
 export default function Page() {
   const hosted = isHostedSite()
+  const jsonLd = buildHomeJsonLd()
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+
       <header>
         <div className="shell head">
           <Link href="/" className="brand" aria-label="Punani AI home">
-            <img src="/logo.png" alt="" width={30} height={35} />
+            <Image src="/logo.png" alt="" width={30} height={35} />
             <span className="wordmark">
               <b>Punani AI</b>
               <span>powerd · naga codex</span>
@@ -37,10 +49,13 @@ export default function Page() {
             <a href="#what" className="hide">
               Features
             </a>
+            <a href="#faq" className="hide">
+              FAQ
+            </a>
             <a href="#install" className="hide">
               Install
             </a>
-            <a href={REPO} target="_blank" rel="noreferrer noopener">
+            <a href={REPO_URL} target="_blank" rel="noreferrer noopener">
               GitHub
             </a>
             <a className="btn" href={LOCAL_APP_URL}>
@@ -53,16 +68,23 @@ export default function Page() {
       <main>
         <section className="hero">
           <div className="hero-bg" aria-hidden>
-            <img
+            <Image
               src="/media/hero-atmosphere.jpg"
               alt=""
-              width={2720}
-              height={1536}
-              fetchPriority="high"
+              fill
+              sizes="100vw"
+              priority
             />
           </div>
           <div className="shell hero-inner">
-            <img className="mark" src="/logo.png" alt="Punani AI" width={108} height={126} />
+            <Image
+              className="mark"
+              src="/logo.png"
+              alt="Punani AI — the open source AI coding agent by Naga Codex, Hamburg"
+              width={108}
+              height={126}
+              priority
+            />
             <span className="tag">
               <span className="pulse" />
               Free · open source · production-grade permissions
@@ -71,10 +93,12 @@ export default function Page() {
               The coding agent that <em>asks before it touches</em> your repo.
             </h1>
             <p className="hero-lede">
-              A full coding agent — not a stripped-down toy — built for people who live on free
-              models and for people who plug in OpenAI, Groq, or whatever you already pay for.
-              Your keys, your machine. Every write and shell command waits for you; every edit
-              shows a diff first. Free tiers ranked first when limits hit.
+              Punani AI is a full AI coding agent for the terminal and the browser — not a
+              stripped-down toy — built for people who live on free models and for people who
+              plug in OpenAI, Groq, or whatever you already pay for. Your keys, your machine.
+              Every edit shows a diff first, and anything that can lose work waits for you. Free
+              tiers ranked first when limits hit. Open source, MIT licensed, built by Maurice
+              Holda and Naga Codex in Hamburg.
             </p>
             <div className="cta">
               <a className="btn" href={LOCAL_APP_URL}>
@@ -101,7 +125,12 @@ export default function Page() {
             </p>
           </div>
           <div className="shell stats">
-            {STATS.map((s) => (
+            {[
+              { n: "8", label: "model providers" },
+              { n: "34", label: "automated tests" },
+              { n: "0", label: "surprise writes" },
+              { n: "MIT", label: "open source" },
+            ].map((s) => (
               <div key={s.label} className="stat">
                 <span className="stat-n">{s.n}</span>
                 <span className="stat-l">{s.label}</span>
@@ -171,12 +200,12 @@ export default function Page() {
                 <span className="frame-title">punani · permission to touch</span>
               </div>
               <div className="frame-media">
-                <img
+                <Image
                   src="/media/showcase-spice.jpg"
-                  alt="Punani AI — cinematic brand visual"
+                  alt="Punani AI in the browser — a permission card blocking a destructive shell command before it runs"
                   width={1920}
                   height={1080}
-                  loading="lazy"
+                  sizes="(max-width: 900px) 100vw, 60vw"
                 />
                 <div className="frame-shine" aria-hidden />
               </div>
@@ -188,42 +217,46 @@ export default function Page() {
         <section id="what">
           <div className="shell">
             <p className="eyebrow">What you get</p>
-            <h2>Three surfaces. One disciplined engine.</h2>
+            <h2>Four surfaces. One disciplined engine.</h2>
             <p className="lede">
               Same permission rules in the terminal and the browser. Last match wins. Free providers
               surface first when something rate-limits.
             </p>
-            <div className="grid three">
-              <div className="card">
-                <div className="core">
-                  <span className="card-icon">⌘</span>
-                  <h3>Terminal agent</h3>
-                  <p>
-                    Slash commands, resumable JSONL sessions, diff preview before every write, and
-                    error messages that name the fix.
-                  </p>
+            <div className="grid four">
+              {SERVICES.map((service) => (
+                <div key={service.name} className="card">
+                  <div className="core">
+                    <span className="card-icon">◆</span>
+                    <h3>{service.name}</h3>
+                    <p>{service.description}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="card">
-                <div className="core">
-                  <span className="card-icon">◈</span>
-                  <h3>Browser command center</h3>
-                  <p>
-                    SSE chat, native folder picker, live preview pane, settings for keys on disk or
-                    in the browser only.
-                  </p>
-                </div>
-              </div>
-              <div className="card">
-                <div className="core">
-                  <span className="card-icon">∞</span>
-                  <h3>Model freedom</h3>
-                  <p>
-                    OpenRouter, NVIDIA NIM, Groq, Cerebras, OpenAI, FreeLLMAPI, Ollama, LM Studio —
-                    live catalogs and real pricing.
-                  </p>
-                </div>
-              </div>
+              ))}
+            </div>
+
+            <div className="table-wrap">
+              <table className="providers">
+                <caption>
+                  Eight model providers, one agent. Free options are ranked first and
+                  rate limits fail over instead of stopping.
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Provider</th>
+                    <th scope="col">Kind</th>
+                    <th scope="col">What it gives you</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {PROVIDERS.map((p) => (
+                    <tr key={p.name}>
+                      <th scope="row">{p.name}</th>
+                      <td>{p.kind}</td>
+                      <td>{p.note}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
@@ -261,11 +294,11 @@ export default function Page() {
               </div>
               <p className="repo-line">
                 Agent:{" "}
-                <a href={AGENT_REPO} target="_blank" rel="noreferrer noopener">
+                <a href={AGENT_REPO_URL} target="_blank" rel="noreferrer noopener">
                   Punani-Power-Agent
                 </a>
                 · Landing:{" "}
-                <a href={REPO} target="_blank" rel="noreferrer noopener">
+                <a href={REPO_URL} target="_blank" rel="noreferrer noopener">
                   Punani-AI
                 </a>
                 ·{" "}
@@ -290,11 +323,60 @@ export default function Page() {
           </div>
         </section>
 
+        <section id="faq">
+          <div className="shell">
+            <p className="eyebrow">Questions</p>
+            <h2>What people ask before they install.</h2>
+            <p className="lede">
+              The short answers. Longer ones live in the <Link href="/about">about page</Link> and
+              the repository.
+            </p>
+            <div className="faq">
+              {FAQ.map((item) => (
+                <details key={item.question} className="faq-item">
+                  <summary>{item.question}</summary>
+                  <p>{item.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="contact">
+          <div className="shell">
+            <div className="card glow">
+              <div className="core">
+                <p className="eyebrow">Contact</p>
+                <h2>Talk to the person who builds it.</h2>
+                <p>
+                  Punani AI is made by {OWNER.name} in {OWNER.city}, {OWNER.countryName}, through{" "}
+                  <a href={OWNER.agency} target="_blank" rel="noreferrer noopener">
+                    Naga Codex
+                  </a>
+                  . The same studio runs{" "}
+                  <a href={OWNER.apparel} target="_blank" rel="noreferrer noopener">
+                    Naga Apparel
+                  </a>
+                  , an urban streetwear label from Hamburg shipping worldwide. Questions about
+                  the agent, the agency or the label go to the same inbox.
+                </p>
+                <p className="small" style={{ marginTop: 18, marginBottom: 0 }}>
+                  <a href={`mailto:${OWNER.email}`}>{OWNER.email}</a>
+                  {" · "}
+                  {OWNER.city}, {OWNER.countryName}
+                  {" · "}
+                  <Link href="/about">About the studio</Link>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="join">
           <div className="shell">
             <div className="signup">
               <div className="core">
-                <img className="signup-mark" src="/logo.png" alt="" width={48} height={56} />
+                <Image className="signup-mark" src="/logo.png" alt="" width={48} height={56} />
                 <p className="eyebrow">Inner circle</p>
                 <h2>Releases, free models, zero noise.</h2>
                 <p>
@@ -316,19 +398,20 @@ export default function Page() {
       <footer>
         <div className="shell foot">
           <p>
-            © {new Date().getFullYear()} Naga Codex · Maurice Holda, Hamburg
+            © {new Date().getFullYear()} Naga Codex · {OWNER.name}, {OWNER.city}
           </p>
           <nav>
+            <Link href="/about">About</Link>
             <a href="https://nagacodex.cloud/impressum.html" target="_blank" rel="noreferrer noopener">
               Impressum
             </a>
             <a href="https://nagacodex.cloud/datenschutz.html" target="_blank" rel="noreferrer noopener">
               Datenschutz
             </a>
-            <a href={REPO} target="_blank" rel="noreferrer noopener">
+            <a href={REPO_URL} target="_blank" rel="noreferrer noopener">
               GitHub
             </a>
-            <a href="mailto:chosenfewrecords@hotmail.de">Contact</a>
+            <a href={`mailto:${OWNER.email}`}>Contact</a>
           </nav>
         </div>
       </footer>
