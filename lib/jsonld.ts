@@ -129,7 +129,7 @@ export function buildHomeJsonLd() {
     applicationSubCategory: "AI coding agent",
     operatingSystem: "macOS, Linux, Windows",
     description:
-      "Punani AI is a full open source AI coding agent for the terminal and the browser. Every write and shell command waits for a permission card, every edit shows a diff first, and free model providers are ranked ahead of paid ones. Bring your own OpenAI, Groq or OpenRouter key, or run it against local Ollama.",
+      "Punani AI is a full open source AI coding agent for the terminal and the browser. Every edit shows a diff first, anything that can lose work stops for a permission card, and free model providers are ranked ahead of paid ones. Bring your own OpenAI, Groq or OpenRouter key, or run it against local Ollama.",
     softwareVersion: "1.1.2",
     license: "https://opensource.org/licenses/MIT",
     downloadUrl: "https://www.npmjs.com/package/punani-powerd",

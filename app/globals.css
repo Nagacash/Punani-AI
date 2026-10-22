@@ -232,6 +232,7 @@ h2 { margin: 0 0 20px; font: 400 clamp(27px, 3.6vw, 42px)/1.18 var(--serif); }
 
 .grid { display: grid; gap: 16px; }
 .grid.three { grid-template-columns: repeat(3, 1fr); }
+.grid.four { grid-template-columns: repeat(2, 1fr); }
 .grid.two { grid-template-columns: repeat(1.1fr 1fr); align-items: start; }
 
 .card {
@@ -339,6 +340,7 @@ footer { border-top: 1px solid var(--hair-soft); padding: 42px 0 54px; }
 
 @media (max-width: 880px) {
   .grid.three { grid-template-columns: 1fr; }
+  .grid.four { grid-template-columns: 1fr; }
   .grid.two { grid-template-columns: 1fr; }
   .hero { padding: 72px 0 0; }
   .hero-inner { padding-bottom: 40px; }

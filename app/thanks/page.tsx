@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 
 /**
@@ -20,7 +21,7 @@ export default function ThanksPage() {
   return (
     <main className="hero">
       <div className="shell">
-        <img className="mark" src="/logo.png" alt="Punani AI" width={108} height={126} />
+        <Image className="mark" src="/logo.png" alt="Punani AI" width={108} height={126} />
         <span className="tag">You are on the list</span>
         <h1>
           Thanks. <em>Talk soon.</em>

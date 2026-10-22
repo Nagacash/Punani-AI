@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { JoinButton, JoinWaitlistForm } from "./join-button"
 import { PromoVideo } from "./promo-video"
@@ -32,7 +33,7 @@ export default function Page() {
       <header>
         <div className="shell head">
           <Link href="/" className="brand" aria-label="Punani AI home">
-            <img src="/logo.png" alt="" width={30} height={35} />
+            <Image src="/logo.png" alt="" width={30} height={35} />
             <span className="wordmark">
               <b>Punani AI</b>
               <span>powerd · naga codex</span>
@@ -67,21 +68,22 @@ export default function Page() {
       <main>
         <section className="hero">
           <div className="hero-bg" aria-hidden>
-            <img
+            <Image
               src="/media/hero-atmosphere.jpg"
               alt=""
-              width={2720}
-              height={1536}
-              fetchPriority="high"
+              fill
+              sizes="100vw"
+              priority
             />
           </div>
           <div className="shell hero-inner">
-            <img
+            <Image
               className="mark"
               src="/logo.png"
               alt="Punani AI — the open source AI coding agent by Naga Codex, Hamburg"
               width={108}
               height={126}
+              priority
             />
             <span className="tag">
               <span className="pulse" />
@@ -94,7 +96,7 @@ export default function Page() {
               Punani AI is a full AI coding agent for the terminal and the browser — not a
               stripped-down toy — built for people who live on free models and for people who
               plug in OpenAI, Groq, or whatever you already pay for. Your keys, your machine.
-              Every write and shell command waits for you; every edit shows a diff first. Free
+              Every edit shows a diff first, and anything that can lose work waits for you. Free
               tiers ranked first when limits hit. Open source, MIT licensed, built by Maurice
               Holda and Naga Codex in Hamburg.
             </p>
@@ -198,12 +200,12 @@ export default function Page() {
                 <span className="frame-title">punani · permission to touch</span>
               </div>
               <div className="frame-media">
-                <img
+                <Image
                   src="/media/showcase-spice.jpg"
                   alt="Punani AI in the browser — a permission card blocking a destructive shell command before it runs"
                   width={1920}
                   height={1080}
-                  loading="lazy"
+                  sizes="(max-width: 900px) 100vw, 60vw"
                 />
                 <div className="frame-shine" aria-hidden />
               </div>
@@ -215,12 +217,12 @@ export default function Page() {
         <section id="what">
           <div className="shell">
             <p className="eyebrow">What you get</p>
-            <h2>Three surfaces. One disciplined engine.</h2>
+            <h2>Four surfaces. One disciplined engine.</h2>
             <p className="lede">
               Same permission rules in the terminal and the browser. Last match wins. Free providers
               surface first when something rate-limits.
             </p>
-            <div className="grid three">
+            <div className="grid four">
               {SERVICES.map((service) => (
                 <div key={service.name} className="card">
                   <div className="core">
@@ -374,7 +376,7 @@ export default function Page() {
           <div className="shell">
             <div className="signup">
               <div className="core">
-                <img className="signup-mark" src="/logo.png" alt="" width={48} height={56} />
+                <Image className="signup-mark" src="/logo.png" alt="" width={48} height={56} />
                 <p className="eyebrow">Inner circle</p>
                 <h2>Releases, free models, zero noise.</h2>
                 <p>

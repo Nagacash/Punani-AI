@@ -99,7 +99,7 @@ export const SERVICES = [
   {
     name: "Permission-first editing",
     description:
-      "Every write and shell command waits for a permission card, and every edit shows a diff before it lands. Last match wins, and nothing is rewritten behind your back.",
+      "Every edit shows a diff before it lands, and anything that can lose work — a file that would be overwritten, a command that deletes — stops at a permission card and waits for you. Nothing is rewritten behind your back.",
   },
 ] as const
 
@@ -112,7 +112,7 @@ export const FAQ = [
   {
     question: "What does \"asks before it touches your repo\" mean?",
     answer:
-      "Every shell command and every file write goes through a permission card first. A destructive command such as rm -rf ./build stops at the card and waits for you. Nothing is applied in the background, and every edit shows a diff before it is written.",
+      "Every edit shows a diff before it is written, and anything that can lose work stops at a permission card and waits for you. A destructive command such as rm -rf ./build stops at the card. The ordinary work — reading, writing, editing, running a command — does not interrupt you. Nothing is applied in the background.",
   },
   {
     question: "Which models can Punani AI use?",

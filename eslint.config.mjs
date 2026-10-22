@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Scratch: the review scripts and the screenshots they take.
+    ".review/**",
   ]),
 ]);
 

@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { buildAboutJsonLd } from "@/lib/jsonld"
-import { BRANDS, OWNER } from "@/lib/site"
+import { BRANDS, OWNER, SITE_LOCALE, SITE_NAME, SITE_URL } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "About — Maurice Holda, Naga Codex and Naga Apparel in Hamburg",
@@ -12,8 +13,18 @@ export const metadata: Metadata = {
     title: "About — Maurice Holda, Naga Codex and Naga Apparel in Hamburg",
     description:
       "The people behind Punani AI: Maurice Holda, Naga Codex in Hamburg, and the Naga Apparel streetwear label.",
-    url: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://punani.agency"}/about`,
+    url: `${SITE_URL}/about`,
+    siteName: SITE_NAME,
+    locale: SITE_LOCALE,
+    type: "website",
     images: [{ url: "/og.jpg", width: 2720, height: 1536, alt: "Naga Codex — Hamburg" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About — Maurice Holda, Naga Codex and Naga Apparel in Hamburg",
+    description:
+      "The people behind Punani AI: Maurice Holda, Naga Codex in Hamburg, and the Naga Apparel streetwear label.",
+    images: ["/og.jpg"],
   },
 }
 
@@ -32,7 +43,7 @@ export default function AboutPage() {
       <header>
         <div className="shell head">
           <Link href="/" className="brand" aria-label="Punani AI home">
-            <img src="/logo.png" alt="" width={30} height={35} />
+            <Image src="/logo.png" alt="" width={30} height={35} />
             <span className="wordmark">
               <b>Punani AI</b>
               <span>powerd · naga codex</span>
