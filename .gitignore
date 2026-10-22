@@ -46,3 +46,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# The video build: the renders and the cache are made again, the source is kept.
+videos/*/renders/
+videos/*/.hyperframes/
