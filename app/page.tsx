@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { JoinButton, JoinWaitlistForm } from "./join-button"
 import { PromoVideo } from "./promo-video"
-import { LOCAL_APP_URL, isHostedSite } from "./app-link"
+import { LOCAL_APP_URL, appEntryHref, isHostedSite } from "./app-link"
 import { buildHomeJsonLd } from "@/lib/jsonld"
 import { FAQ, OWNER, REPO_URL, AGENT_REPO_URL, SERVICES } from "@/lib/site"
 
@@ -58,7 +58,7 @@ export default function Page() {
             <a href={REPO_URL} target="_blank" rel="noreferrer noopener">
               GitHub
             </a>
-            <a className="btn" href={LOCAL_APP_URL}>
+            <a className="btn" href={appEntryHref(hosted)}>
               <span className="orb">↗</span> Open the app
             </a>
           </nav>
@@ -101,7 +101,7 @@ export default function Page() {
               subscription lock-in. Your keys stay on your machine. Free models first.
             </p>
             <div className="cta">
-              <a className="btn" href={LOCAL_APP_URL}>
+              <a className="btn" href={appEntryHref(hosted)}>
                 <span className="orb">↗</span> Open the app
               </a>
               <a className="btn ghost" href="#install">
@@ -113,9 +113,8 @@ export default function Page() {
             <p className="note">
               {hosted ? (
                 <>
-                  <b>Open the app</b> only works on the same computer where <b>punani web</b> is
-                  already running ({LOCAL_APP_URL}). New here? Use <b>Install</b> first, then paste
-                  the token from your terminal.
+                  <b>Open the app</b> takes you to sign-in steps — the agent runs on this computer at{" "}
+                  {LOCAL_APP_URL} after <b>punani web</b>. New here? Use <b>Install</b> first.
                 </>
               ) : (
                 <>
@@ -289,9 +288,9 @@ export default function Page() {
                   <span className="k">browser</span>
                   <span className="v">
                     punani web{" "}
-                    <a href={LOCAL_APP_URL} style={{ color: "var(--gold)" }}>
+                    <Link href={appEntryHref(hosted)} style={{ color: "var(--gold)" }}>
                       — open it now
-                    </a>
+                    </Link>
                   </span>
                 </li>
               </div>
