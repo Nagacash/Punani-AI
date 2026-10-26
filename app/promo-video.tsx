@@ -10,14 +10,17 @@ const LOOP = ["Read", "Edit", "Diff", "rm -rf ./build"] as const
  */
 export function PromoVideo() {
   const video = useRef<HTMLVideoElement>(null)
-  const [playing, setPlaying] = useState(true)
+  const [playing, setPlaying] = useState(false)
 
   useEffect(() => {
     const element = video.current
     if (!element) return
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (reduced) {
       element.pause()
+      return
     }
+    void element.play()
   }, [])
 
   function toggle() {
@@ -56,7 +59,6 @@ export function PromoVideo() {
           poster="/media/punani-promo-9-16.png"
           width={720}
           height={858}
-          autoPlay
           muted
           loop
           playsInline
