@@ -43,7 +43,7 @@ export default function AboutPage() {
       <header>
         <div className="shell head">
           <Link href="/" className="brand" aria-label="Punani AI home">
-            <Image src="/logo.png" alt="" width={30} height={35} />
+            <Image src="/logo.png" alt="" width={32} height={32} unoptimized />
             <span className="wordmark">
               <b>Punani AI</b>
               <span>powerd · naga codex</span>
@@ -151,9 +151,11 @@ export default function AboutPage() {
                 <p style={{ marginBottom: 4 }}>
                   Both codebases are public. Read the agent, read the site, run it yourself.
                 </p>
-                <code className="cmd">
+                <code className="cmd cmd-lead">
                   <b>$</b> npm i -g punani-powerd
-                  {"\n"}<b>$</b> punani --init
+                </code>
+                <code className="cmd">
+                  <b>$</b> punani --init
                   {"\n\n"}<b>→</b> github.com/Nagacash/Punani-Power-Agent
                   {"\n"}<b>→</b> github.com/Nagacash/Punani-AI
                 </code>
