@@ -17,7 +17,6 @@ export function PromoVideo() {
     if (!element) return
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       element.pause()
-      setPlaying(false)
     }
   }, [])
 
