@@ -33,7 +33,7 @@ export default function Page() {
       <header>
         <div className="shell head">
           <Link href="/" className="brand" aria-label="Punani AI home">
-            <Image src="/logo.png" alt="" width={30} height={35} />
+            <Image src="/logo.png" alt="" width={32} height={32} unoptimized />
             <span className="wordmark">
               <b>Punani AI</b>
               <span>powerd · naga codex</span>
@@ -80,25 +80,25 @@ export default function Page() {
             <Image
               className="mark"
               src="/logo.png"
-              alt="Punani AI — the open source AI coding agent by Naga Codex, Hamburg"
-              width={108}
-              height={126}
+              alt="Punani"
+              width={112}
+              height={112}
+              unoptimized
               priority
             />
-            <span className="tag">
-              <span className="pulse" />
-              Free · open source · production-grade permissions
-            </span>
+            <div className="badge-row">
+              <span className="tag tag-place">🇩🇪 Made in Germany · Hamburg</span>
+              <span className="tag">
+                <span className="pulse" />
+                Free · Open Source · Production-grade permissions
+              </span>
+            </div>
             <h1>
               The coding agent that <em>asks before it touches</em> your repo.
             </h1>
             <p className="hero-lede">
-              Punani AI is a full AI coding agent for the terminal and the browser — not a
-              stripped-down toy — built for people who live on free models and for people who
-              plug in OpenAI, Groq, or whatever you already pay for. Your keys, your machine.
-              Every edit shows a diff first, and anything that can lose work waits for you. Free
-              tiers ranked first when limits hit. Open source, MIT licensed, built by Maurice
-              Holda and Naga Codex in Hamburg.
+              A Cursor-level AI coding agent in the CLI and the web browser, with $0
+              subscription lock-in. Your keys stay on your machine. Free models first.
             </p>
             <div className="cta">
               <a className="btn" href={LOCAL_APP_URL}>
@@ -109,6 +109,7 @@ export default function Page() {
               </a>
               <JoinButton />
             </div>
+            <PromoVideo />
             <p className="note">
               {hosted ? (
                 <>
@@ -141,11 +142,11 @@ export default function Page() {
 
         <section id="for-you">
           <div className="shell">
-            <p className="eyebrow">What makes Punani different</p>
-            <h2>Free coding that still feels pro — or bring the keys you already have.</h2>
-            <p className="lede center">
-              No subscription to us. No lock-in. Same permission engine and diff-first edits whether
-              your bill is $0 or you run frontier models on your own dime.
+            <p className="eyebrow">Why Punani</p>
+            <h2>Top-tier AI. No monthly lock-in.</h2>
+            <p className="lede center why-line">
+              Built for developers who want to code with top-tier AI for free instead of paying
+              monthly $20/mo subscriptions.
             </p>
             <div className="grid two">
               <div className="card glow">
@@ -210,7 +211,6 @@ export default function Page() {
                 <div className="frame-shine" aria-hidden />
               </div>
             </div>
-            <PromoVideo />
           </div>
         </section>
 
@@ -269,6 +269,9 @@ export default function Page() {
               <p className="lede">
                 Global CLI, wizard for provider + key, then pick a free model and go.
               </p>
+              <code className="cmd cmd-lead">
+                <b>$</b> npm i -g punani-powerd
+              </code>
               <div className="list">
                 <li>
                   <span className="k">install</span>
@@ -312,6 +315,9 @@ export default function Page() {
                   OpenRouter free models, NVIDIA NIM credits, FreeLLMAPI failover — ranked so you
                   are not stuck behind a 429.
                 </p>
+                <code className="cmd cmd-lead">
+                  <b>$</b> npm i -g punani-powerd
+                </code>
                 <code className="cmd">
                   <b>$</b> punani --init
                   {"\n"}provider   openrouter
@@ -376,7 +382,7 @@ export default function Page() {
           <div className="shell">
             <div className="signup">
               <div className="core">
-                <Image className="signup-mark" src="/logo.png" alt="" width={48} height={56} />
+                <Image className="signup-mark" src="/logo.png" alt="" width={48} height={48} unoptimized />
                 <p className="eyebrow">Inner circle</p>
                 <h2>Releases, free models, zero noise.</h2>
                 <p>

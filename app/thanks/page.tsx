@@ -21,7 +21,7 @@ export default function ThanksPage() {
   return (
     <main className="hero">
       <div className="shell">
-        <Image className="mark" src="/logo.png" alt="Punani AI" width={108} height={126} />
+        <Image className="mark" src="/logo.png" alt="Punani" width={112} height={112} unoptimized />
         <span className="tag">You are on the list</span>
         <h1>
           Thanks. <em>Talk soon.</em>
@@ -29,9 +29,11 @@ export default function ThanksPage() {
         <p>
           We will write when something lands. Until then, the agent is waiting:
         </p>
-        <code className="cmd" style={{ maxWidth: 460, margin: "30px auto 0", textAlign: "left" }}>
+        <code className="cmd cmd-lead" style={{ maxWidth: 460, margin: "30px auto 0", textAlign: "left" }}>
           <b>$</b> npm i -g punani-powerd
-          {"\n"}<b>$</b> punani --init
+        </code>
+        <code className="cmd" style={{ maxWidth: 460, margin: "10px auto 0", textAlign: "left" }}>
+          <b>$</b> punani --init
         </code>
         <p className="note">
           <Link href="/">back to the start</Link>
